@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['dask_421',['DASK',['../classlazyfatpandas_1_1base_1_1BackendEngines.html#a73952de307dec720676a4f8bfe17a1fe',1,'lazyfatpandas.base.BackendEngines.DASK()'],['../classlazyfatpandas_1_1utils_1_1BackendEngines.html#a7cfc0634cd39d7fc8f95a3d7328d8876',1,'lazyfatpandas.utils.BackendEngines.DASK()']]],
+  ['dataframe_422',['DataFrame',['../namespacelazyfatpandas_1_1pandas.html#ac48dca00e2dbb13a765915eb992f7a77',1,'lazyfatpandas::pandas']]],
+  ['date_423',['DATE',['../classlazyfatpandas_1_1LazyOp_1_1LazyOpType.html#ac0b6b86d52cfe61f3aed78479afd59ad',1,'lazyfatpandas.LazyOp.LazyOpType.DATE()'],['../classlazyfatpandas_1_1LazyOp_1_1DtAccProps.html#a2137799d8e0ee007f1979f2f2cee7266',1,'lazyfatpandas.LazyOp.DtAccProps.date()']]],
+  ['day_424',['DAY',['../classlazyfatpandas_1_1LazyOp_1_1LazyOpType.html#a87799a69fbbf693190c63e5714e89ef4',1,'lazyfatpandas.LazyOp.LazyOpType.DAY()'],['../classlazyfatpandas_1_1LazyOp_1_1DtAccProps.html#a02a60c8e9abafb20df282a138ae18359',1,'lazyfatpandas.LazyOp.DtAccProps.day()']]],
+  ['day_5fof_5fweek_425',['day_of_week',['../classlazyfatpandas_1_1LazyOp_1_1DtAccProps.html#ab33821cbe0286edbe2d99d987ee38a42',1,'lazyfatpandas::LazyOp::DtAccProps']]],
+  ['day_5fof_5fyear_426',['day_of_year',['../classlazyfatpandas_1_1LazyOp_1_1DtAccProps.html#ae54b21ddbf5e9689013e7785044575e4',1,'lazyfatpandas::LazyOp::DtAccProps']]],
+  ['dayofweek_427',['dayofweek',['../classlazyfatpandas_1_1LazyOp_1_1DtAccProps.html#ad2f0b19f2c06bc22790251860e358c0c',1,'lazyfatpandas::LazyOp::DtAccProps']]],
+  ['dayofyear_428',['dayofyear',['../classlazyfatpandas_1_1LazyOp_1_1DtAccProps.html#a99f5777bcc44ff744dbf025ff7132c4d',1,'lazyfatpandas::LazyOp::DtAccProps']]],
+  ['daysinomnth_429',['daysinomnth',['../classlazyfatpandas_1_1LazyOp_1_1DtAccProps.html#ab95fb146d204514448ba4ca0f518c578',1,'lazyfatpandas::LazyOp::DtAccProps']]],
+  ['default_5fcompute_430',['DEFAULT_COMPUTE',['../classlazyfatpandas_1_1LazyOp_1_1LazyOpType.html#a597cb1c27c8037353007605a0eb0a138',1,'lazyfatpandas::LazyOp::LazyOpType']]],
+  ['depends_5fon_431',['depends_on',['../classlazyfatpandas_1_1base_1_1BaseNode.html#a084797242071e6549d5a2518ea342f2b',1,'lazyfatpandas::base::BaseNode']]],
+  ['describe_432',['DESCRIBE',['../classlazyfatpandas_1_1LazyOp_1_1LazyOpType.html#ab16af7c0e897e3fa9b448285786364ff',1,'lazyfatpandas::LazyOp::LazyOpType']]],
+  ['df_5fshape_433',['df_shape',['../classlazyfatpandas_1_1pandas_1_1FatDataFrame.html#ab0ca9a067096c704f899ca3e26ae0e27',1,'lazyfatpandas::pandas::FatDataFrame']]],
+  ['div_434',['DIV',['../classlazyfatpandas_1_1LazyOp_1_1LazyOpType.html#a9b6d4706f86caf73d1e4dba4a4214ae4',1,'lazyfatpandas::LazyOp::LazyOpType']]],
+  ['dot_435',['DOT',['../classlazyfatpandas_1_1LazyOp_1_1LazyOpType.html#a4b32dfe07c6e156cbbf9ff815785cf02',1,'lazyfatpandas::LazyOp::LazyOpType']]],
+  ['drop_436',['DROP',['../classlazyfatpandas_1_1LazyOp_1_1LazyOpType.html#a1ab0754f145462049f6686de254b5826',1,'lazyfatpandas::LazyOp::LazyOpType']]],
+  ['drop_5fduplicate_437',['DROP_DUPLICATE',['../classlazyfatpandas_1_1LazyOp_1_1LazyOpType.html#a58147b05814493726dba4fad6bb17358',1,'lazyfatpandas::LazyOp::LazyOpType']]],
+  ['dropna_438',['DROPNA',['../classlazyfatpandas_1_1LazyOp_1_1LazyOpType.html#ab0babf3635327a5e5d2556aafa9cdd13',1,'lazyfatpandas::LazyOp::LazyOpType']]],
+  ['dt_439',['DT',['../classlazyfatpandas_1_1LazyOp_1_1LazyOpType.html#a222063edbe10e115c5cb529c6d13bacd',1,'lazyfatpandas.LazyOp.LazyOpType.DT()'],['../classlazyfatpandas_1_1LazyOp_1_1LazyOpType.html#a56535e457ef0e00703f8dbfe44b8381b',1,'lazyfatpandas.LazyOp.LazyOpType.dt()'],['../classlazyfatpandas_1_1pandas_1_1FatDataFrame.html#aa850a907eeb62151d2a3cad43cc1c850',1,'lazyfatpandas.pandas.FatDataFrame.dt()']]],
+  ['dtype_440',['dtype',['../classlazyfatpandas_1_1LazyOp_1_1Meta.html#aa18351b0998173e5e2a5fe3ae8235b86',1,'lazyfatpandas::LazyOp::Meta']]]
+];

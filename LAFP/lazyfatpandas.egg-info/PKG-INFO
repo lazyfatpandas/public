@@ -1,0 +1,356 @@
+Metadata-Version: 2.1
+Name: lazyfatpandas
+Version: 0.1
+Summary: Your custom lazy pandas wrapper
+Author: Bhushan, Chiranmoy, Priyesh, Utkarsh, Sudarshan
+Author-email: singhbhushan@cse.iitb.ac.in
+Classifier: Programming Language :: Python :: 3
+Description-Content-Type: text/markdown
+
+# LazyFatPandas
+
+## SCIRPY Translations
+Transalations required by scirpy
+
+|S.No| Description   | Example  |
+|:---:|---------------|----------|
+| 1   | Replace import statement | `import lazyfatpandas.pandas as pd`|
+| 2   | Drop `inplace` parameter.   <br/> Dask doesn't support |
+| 2   | Column specific property to apply function. <br/> Because we are yet to implement those specific properties. | `df['Day'] = df.pickup_datetime.dt.dayofweek` to <br/> `df['Day'] = df.pickup_datetime.apply(lambda x: d.dayofweek)` |
+
+
+## More translation
+1. Series assignment. Dask doesn't support these kind of assignment. Therefore we need to use `mask` operation.
+<table>
+<tr>
+<th>Original</th>
+<th>Modified</th>
+</tr>
+<tr>
+<td>
+  
+```
+# zips is a series
+
+zips == "00000" 
+zips[zero_zips] = np.nan
+```
+  
+</td>
+<td>
+
+```json
+zips = zips.mask(
+    zips == "00000", np.nan)
+
+```
+
+</td>
+</tr>
+</table>
+  ```  
+      
+
+## Checklist
+- [x] Static analysis API
+- [ ] Runtime
+  - [ ] Analyze
+    - [x] Add DataFrame wrapper
+    - [ ] Add Series wrapper
+    - [x] Check compability with dask and modin
+      - [x] Row indexing
+      - [ ] iloc, loc
+    - [x] Intermediate form -> Graph Nodes
+  - [ ] Rewrite: Intermediate form to pandas/dask/modin code
+      - [ ] Generate equivalent statement
+  - [ ] Dask specifics
+      - [ ] Drop `inplace` operation
+  - [ ] Optmization
+    - [x] Column selection
+      - [x] Identify `Gen/Kill` columns in each operation
+      - [x] Propogate it to `read_csv`
+      - [x] `Strongly live variable` analysis considering each column as a variable and **removing dead operations**.
+    - [x] Row selection
+      - [x] Identify row selection operation: `get-item` followed by `condition` expression
+      - [x] Move operation closer to read_csv
+      - [x] Move conflicting nodes
+    - [x] Merge multiple row selection statements using **AND**
+    - [ ] Merge multiple **apply** functions on same axis
+    - [ ] Rearrange for pipelined operations
+    - [ ] Add `drop column` statements for columns not used in remaining program
+    - [ ] Equivalent Code (eSQL)
+      - [ ] Loops to pandas functions (aggregates, apply)
+    - [ ] COBRA
+    - [ ] Cost estimator based on estimated rows added/deleted at each operator
+    - [ ] Backend selection
+- [x] Execute
+
+
+<!-- Style -->
+<style>
+table {
+    border-collapse: collapse;
+}
+table, th, td {
+   border: 1px solid black;
+}
+blockquote {
+    border-left: solid blue;
+	padding-left: 10px;
+}
+</style>
+
+
+## Issues
+- `Quantile` dask and modin/pandas output is different. Dask returns dataframe (with 1 less row) whereas modin/pandas returns single number
+- `Agg` param can be string, list, dict, func. Need to handle gen/kill set
+- Dask doesn't support series item assignment
+
+
+# Note
+- Add 18GB.csv file in data folder
+- Create folder `data/18` and add multiple `18GB.csv` files for benchmark
+
+
+
+
+- Multiple computes
+- Accumulate print statements for computes at the end
+
+# Completed
+- Merge sayanti's code
+- Functions
+  -  info, head, describe
+- Benchmarks
+  - Col selection
+  - Row selection & Merge filters
+  - Deadcode
+
+- Series assignment
+- Str accessors
+- Client() vs Dask defaults
+- Dask does not support all accessors properties (like minute, seconds etc)
+
+# Pending tasks
+- Final test
+  - Col selection
+  - Row selection & Merge filters
+  - Deadcode
+
+# Others
+  - Cost estimator
+  - Identify dtypes based on execution path (Dask fails if guessed column is different than actual runtime column dtype)
+
+
+
+# Row selection algorithm
+```
+
+Row_selection(task_graph G)
+
+  For each node v in topological order of task graph G
+    Let u = Immediate preceding operation of v in task graph
+
+    If (v is row_selection operation)
+      and (u is a row_selection operation)
+      and (has_merge_conflict(u,v) is False)
+      and (v is live at all program paths from u to program end)
+    Then 
+      Remove v from all other paths from u to program end
+      Merge(u,v) as u and continue
+
+    If (v is a row_selection operation)
+        and (u is not a row_selection)
+        and (has_swap_conflict(u,v) is False)
+        and (v is live at all program paths from u to program end)
+    Then
+      Remove v from all other paths from u to program end
+      Swap(u,v) and continue
+    Else
+
+    <!-- Check for multi-path -->
+      If (v is a compound_row_selection_statement)
+        and (has_swap_conflicts(u,v) is False)
+        and (v is live at all program paths from u to program end)
+        and (not is_row_selection(u) OR has_merge_conflicts(u, get_row_selection_from(v)) is False)
+      Then
+        Swap(u,v)
+        Merge(get_row_selection_from(v), u) and coninue
+      Else
+        Consider (u,v) as compound row selection statement continue
+
+
+def has_swap_conflicts(task_graph u, task_graph v)
+
+  // u preceeds v in task graph (start...u-v...end)
+
+  If (Gen(v).intersect(Kill(u)) is not empty)
+    Or operator(u) is in [Operators affecting dataframe shape]
+  
+  Then
+    return True
+  
+  return False
+
+
+
+def is_row_selection(task_graph u)
+  If (operation(u) is 'get-item')
+    and u has 1 child
+    and (operation(child(u))) in [>, >=, <= <, ==, !=, &, |]
+  Then
+    return True
+  
+  // Not a row selection operation
+  return False
+
+def has_merge_conflict(task_graph u, task_graph v)
+
+  // Both u and v are row_selection statements
+  // And u is preceeding v in task graph (start...u-v...end)
+  
+  If any operators(v) is present in [Aggregates, Operations_requires_complete pass over the data] 
+  Then
+    // Cannot merge
+    return True
+
+  // No conflits. Can be merged together
+  Return False
+
+
+```
+
+
+# Compute() algorithm
+### Static analysis
+```
+Assumptions
+1. No UDFs/loops
+
+Push_Compute(input_program P)
+Begin
+  
+  Substitute constant variables
+  Change dataframe assignment to unique LHS
+
+  print_statements = []
+  temp_vars = {}
+  pi = 0 # Print statement sequence number
+  Foreach statement S in program P:
+    If is_print_statement(S)
+      temp_vars[pi] = {}
+      pj = 0
+      Foreach variable V used in S:
+        temp_vars[pi][pj++] = V
+      End Foreach
+
+      print_statements.append(S)
+      Remove_statement(S, P) # Removes statement S from Program P
+      pi++
+  End Foreach
+
+  Append_statement("res = pd.compute(List of dataframe objects from temp_vars)", P)
+
+  pi = 0
+  Foreach dataframe_op in temp_vars:
+    Append_statement("dataframe_op = res[pi++]", P)
+  End Foreach
+
+  Foreach statement S in print_statements:
+    Append_statement(S, P)
+  End Foreach
+
+End
+
+```
+
+
+# Columns selection
+```
+Assumptions
+  1. Columns must be explictly specified/can be inferred by in all operations.
+  2. It will read all columns incase it is unable to identify any columns used.
+   
+Column_Selection(task_graph G)
+  Input: Reference to a task_graph node. Input program is represented as DAG
+  Output: Modified task graph with usecols set to each node
+
+  Properties of each node
+  1. Genset: Column(s) used in this operation
+  2. Killset: Column(s) kill/updated in this operation
+  3. Usecols: Column(s) that are live after this operation. These columns are used atleast once in remaining program.
+  4. Sources: List of Nodes which are input to this operation
+  
+  Begin
+
+    # DFS traversal
+    If G is None:
+      return
+
+    G.Usecols = G.Genset
+
+    Foreach child of node G.sources:
+      # Preorder DFS
+      Column_Selection(child)
+      G.Usecols = G.Usecols intersect child.Usecols # Update Usecols based on child
+
+    End Foreach
+    
+
+  End
+
+
+```
+
+
+## Cost Estimator
+
+
+
+## Deadcode remove
+```
+
+remove_redundant_code(task_graph G, liveset = set(), is_start = False)
+# Initially G.useful is set to False for all nodes
+Begin
+
+  If (is_start) Then
+    G.liveset = G.genset
+    G.useful = True
+    remove_redundant_code(G.old_node, G.liveset, False)
+    return
+  EndIf
+
+  If (G is [Reader functions like read_csv]) Then
+    If (G.allcols intersection liveset is not empty) Then
+      G.liveset = G.allcols intersection liveset
+      G.useful = True
+    EndIf
+    return
+  EndIf
+
+  G.liveset = liveset
+  If G.killset not empty Then
+    # This is updating the dataframe
+    If G.killset intersection liveset Then # updated column is used later
+      G.liveset = G.liveset union G.genset
+      G.useful = True
+    Else  If (G is modifying metadata like rename) and (liveset intersection G.genset not empty) Then
+      G.liveset = G.liveset union G.killset
+      G.useful = True
+    EndIf
+  Else If G.genset intersection liveset not empty Then
+    G.liveset = G.liveset union G.genset
+    G.useful = True
+  EndIf
+End
+
+
+```
+
+### Populate genkill set
+```
+
+
+
+```

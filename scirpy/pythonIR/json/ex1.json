@@ -1,0 +1,481 @@
+{
+  "ast_type": "Module",
+  "body": [
+    {
+      "ast_type": "Import",
+      "col_offset": 0,
+      "lineno": 1,
+      "names": [
+        {
+          "asname": "pd",
+          "ast_type": "alias",
+          "name": "pandas"
+        }
+      ]
+    },
+    {
+      "ast_type": "Assign",
+      "col_offset": 0,
+      "lineno": 2,
+      "targets": [
+        {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "ctx": {
+            "ast_type": "Store"
+          },
+          "id": "df",
+          "lineno": 2
+        }
+      ],
+      "value": {
+        "args": [
+          {
+            "ast_type": "Str",
+            "col_offset": 17,
+            "lineno": 2,
+            "s": "~/intellijprojects/scirpy_benchmarks/examples/data/data.csv"
+          }
+        ],
+        "ast_type": "Call",
+        "col_offset": 5,
+        "func": {
+          "ast_type": "Attribute",
+          "attr": "read_csv",
+          "col_offset": 5,
+          "ctx": {
+            "ast_type": "Load"
+          },
+          "lineno": 2,
+          "value": {
+            "ast_type": "Name",
+            "col_offset": 5,
+            "ctx": {
+              "ast_type": "Load"
+            },
+            "id": "pd",
+            "lineno": 2
+          }
+        },
+        "keywords": [
+          {
+            "arg": "parse_dates",
+            "ast_type": "keyword",
+            "value": {
+              "ast_type": "List",
+              "col_offset": 105,
+              "ctx": {
+                "ast_type": "Load"
+              },
+              "elts": [
+                {
+                  "ast_type": "Str",
+                  "col_offset": 106,
+                  "lineno": 2,
+                  "s": "pickup_datetime"
+                }
+              ],
+              "lineno": 2
+            }
+          }
+        ],
+        "lineno": 2
+      }
+    },
+    {
+      "ast_type": "Expr",
+      "col_offset": 0,
+      "lineno": 3,
+      "value": {
+        "args": [],
+        "ast_type": "Call",
+        "col_offset": 0,
+        "func": {
+          "ast_type": "Attribute",
+          "attr": "memory_usage",
+          "col_offset": 0,
+          "ctx": {
+            "ast_type": "Load"
+          },
+          "lineno": 3,
+          "value": {
+            "ast_type": "Name",
+            "col_offset": 0,
+            "ctx": {
+              "ast_type": "Load"
+            },
+            "id": "df",
+            "lineno": 3
+          }
+        },
+        "keywords": [
+          {
+            "arg": "deep",
+            "ast_type": "keyword",
+            "value": {
+              "ast_type": "NameConstant",
+              "col_offset": 21,
+              "lineno": 3,
+              "value": "True"
+            }
+          }
+        ],
+        "lineno": 3
+      }
+    },
+    {
+      "ast_type": "Expr",
+      "col_offset": 0,
+      "lineno": 4,
+      "value": {
+        "args": [
+          {
+            "ast_type": "Attribute",
+            "attr": "dtypes",
+            "col_offset": 6,
+            "ctx": {
+              "ast_type": "Load"
+            },
+            "lineno": 4,
+            "value": {
+              "ast_type": "Name",
+              "col_offset": 6,
+              "ctx": {
+                "ast_type": "Load"
+              },
+              "id": "df",
+              "lineno": 4
+            }
+          }
+        ],
+        "ast_type": "Call",
+        "col_offset": 0,
+        "func": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "ctx": {
+            "ast_type": "Load"
+          },
+          "id": "print",
+          "lineno": 4
+        },
+        "keywords": [],
+        "lineno": 4
+      }
+    },
+    {
+      "ast_type": "Assign",
+      "col_offset": 0,
+      "lineno": 5,
+      "targets": [
+        {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "ctx": {
+            "ast_type": "Store"
+          },
+          "id": "df",
+          "lineno": 5
+        }
+      ],
+      "value": {
+        "ast_type": "Subscript",
+        "col_offset": 5,
+        "ctx": {
+          "ast_type": "Load"
+        },
+        "lineno": 5,
+        "slice": {
+          "ast_type": "Index",
+          "value": {
+            "ast_type": "Compare",
+            "col_offset": 8,
+            "comparators": [
+              {
+                "ast_type": "Num",
+                "col_offset": 25,
+                "lineno": 5,
+                "n": {
+                  "ast_type": "int",
+                  "n": 0,
+                  "n_str": "0"
+                }
+              }
+            ],
+            "left": {
+              "ast_type": "Attribute",
+              "attr": "fare_amount",
+              "col_offset": 8,
+              "ctx": {
+                "ast_type": "Load"
+              },
+              "lineno": 5,
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 8,
+                "ctx": {
+                  "ast_type": "Load"
+                },
+                "id": "df",
+                "lineno": 5
+              }
+            },
+            "lineno": 5,
+            "ops": [
+              {
+                "ast_type": "Gt"
+              }
+            ]
+          }
+        },
+        "value": {
+          "ast_type": "Name",
+          "col_offset": 5,
+          "ctx": {
+            "ast_type": "Load"
+          },
+          "id": "df",
+          "lineno": 5
+        }
+      }
+    },
+    {
+      "ast_type": "Assign",
+      "col_offset": 0,
+      "lineno": 6,
+      "targets": [
+        {
+          "ast_type": "Subscript",
+          "col_offset": 0,
+          "ctx": {
+            "ast_type": "Store"
+          },
+          "lineno": 6,
+          "slice": {
+            "ast_type": "Index",
+            "value": {
+              "ast_type": "Str",
+              "col_offset": 3,
+              "lineno": 6,
+              "s": "day"
+            }
+          },
+          "value": {
+            "ast_type": "Name",
+            "col_offset": 0,
+            "ctx": {
+              "ast_type": "Load"
+            },
+            "id": "df",
+            "lineno": 6
+          }
+        }
+      ],
+      "value": {
+        "ast_type": "Attribute",
+        "attr": "dayofweek",
+        "col_offset": 12,
+        "ctx": {
+          "ast_type": "Load"
+        },
+        "lineno": 6,
+        "value": {
+          "ast_type": "Attribute",
+          "attr": "dt",
+          "col_offset": 12,
+          "ctx": {
+            "ast_type": "Load"
+          },
+          "lineno": 6,
+          "value": {
+            "ast_type": "Attribute",
+            "attr": "pickup_datetime",
+            "col_offset": 12,
+            "ctx": {
+              "ast_type": "Load"
+            },
+            "lineno": 6,
+            "value": {
+              "ast_type": "Name",
+              "col_offset": 12,
+              "ctx": {
+                "ast_type": "Load"
+              },
+              "id": "df",
+              "lineno": 6
+            }
+          }
+        }
+      }
+    },
+    {
+      "ast_type": "Expr",
+      "col_offset": 0,
+      "lineno": 7,
+      "value": {
+        "args": [
+          {
+            "args": [],
+            "ast_type": "Call",
+            "col_offset": 6,
+            "func": {
+              "ast_type": "Attribute",
+              "attr": "info",
+              "col_offset": 6,
+              "ctx": {
+                "ast_type": "Load"
+              },
+              "lineno": 7,
+              "value": {
+                "ast_type": "Name",
+                "col_offset": 6,
+                "ctx": {
+                  "ast_type": "Load"
+                },
+                "id": "df",
+                "lineno": 7
+              }
+            },
+            "keywords": [],
+            "lineno": 7
+          }
+        ],
+        "ast_type": "Call",
+        "col_offset": 0,
+        "func": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "ctx": {
+            "ast_type": "Load"
+          },
+          "id": "print",
+          "lineno": 7
+        },
+        "keywords": [],
+        "lineno": 7
+      }
+    },
+    {
+      "ast_type": "Assign",
+      "col_offset": 0,
+      "lineno": 8,
+      "targets": [
+        {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "ctx": {
+            "ast_type": "Store"
+          },
+          "id": "df",
+          "lineno": 8
+        }
+      ],
+      "value": {
+        "args": [],
+        "ast_type": "Call",
+        "col_offset": 5,
+        "func": {
+          "ast_type": "Attribute",
+          "attr": "sum",
+          "col_offset": 5,
+          "ctx": {
+            "ast_type": "Load"
+          },
+          "lineno": 8,
+          "value": {
+            "ast_type": "Subscript",
+            "col_offset": 5,
+            "ctx": {
+              "ast_type": "Load"
+            },
+            "lineno": 8,
+            "slice": {
+              "ast_type": "Index",
+              "value": {
+                "ast_type": "Str",
+                "col_offset": 25,
+                "lineno": 8,
+                "s": "passenger_count"
+              }
+            },
+            "value": {
+              "args": [
+                {
+                  "ast_type": "List",
+                  "col_offset": 16,
+                  "ctx": {
+                    "ast_type": "Load"
+                  },
+                  "elts": [
+                    {
+                      "ast_type": "Str",
+                      "col_offset": 17,
+                      "lineno": 8,
+                      "s": "day"
+                    }
+                  ],
+                  "lineno": 8
+                }
+              ],
+              "ast_type": "Call",
+              "col_offset": 5,
+              "func": {
+                "ast_type": "Attribute",
+                "attr": "groupby",
+                "col_offset": 5,
+                "ctx": {
+                  "ast_type": "Load"
+                },
+                "lineno": 8,
+                "value": {
+                  "ast_type": "Name",
+                  "col_offset": 5,
+                  "ctx": {
+                    "ast_type": "Load"
+                  },
+                  "id": "df",
+                  "lineno": 8
+                }
+              },
+              "keywords": [],
+              "lineno": 8
+            }
+          }
+        },
+        "keywords": [],
+        "lineno": 8
+      }
+    },
+    {
+      "ast_type": "Expr",
+      "col_offset": 0,
+      "lineno": 9,
+      "value": {
+        "args": [
+          {
+            "ast_type": "Name",
+            "col_offset": 6,
+            "ctx": {
+              "ast_type": "Load"
+            },
+            "id": "df",
+            "lineno": 9
+          }
+        ],
+        "ast_type": "Call",
+        "col_offset": 0,
+        "func": {
+          "ast_type": "Name",
+          "col_offset": 0,
+          "ctx": {
+            "ast_type": "Load"
+          },
+          "id": "print",
+          "lineno": 9
+        },
+        "keywords": [],
+        "lineno": 9
+      }
+    }
+  ]
+}

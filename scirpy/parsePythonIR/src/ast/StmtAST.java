@@ -1,0 +1,26 @@
+package ast;
+public enum StmtAST {
+    FunctionDef,
+    ClassDef,
+    Return,
+    Delete,
+    Assign,
+    AugAssign,
+    Print,
+    For,
+    While,
+    If,
+    With,
+    Raise,
+    TryExcept,
+    TryFinally,
+    Assert,
+    Import,
+    ImportFrom,
+    Exec,
+    Global,
+    Expr,
+    Pass,
+    Break,
+    Continue
+}

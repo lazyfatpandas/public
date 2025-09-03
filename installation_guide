@@ -1,0 +1,45 @@
+The installation of Lazy fat Pandas requires installation of two separate packages:
+1. SCIRPy - Static Analysis Tool
+2. LaFP- Lazy fat Pandas runtime
+
+1. SCIRPy - Static Analysis Tool Installation:
+a. Create a module for LaFP_SCIRPy with sciroy-->parsePythonIR-->src as source folder
+b. Add all libs from scirpy-->libs to the module
+c. Build the artifact
+Note: SCIRPy requires jdk 8.0. We have used jdk-8u281-linux-x64
+
+
+2. LaFP- Lazy fat Pandas runtime Installation:
+1st step is to enter the source directory of LaFP i.e. LAFP directory. Assuming you are in the LaFP_SCIRPy folder, run the following commands:
+1. cd LAFP
+2.  pip install -e .
+
+This will install LaFP as a local package and you will see the following output on the screen in case of successful installation:
+"""Installing collected packages: lazyfatpandas
+...
+Successfully installed lazyfatpandas"""
+
+
+Note: Following python packages needs to be installed to access lazy fat pandas:
+After creating a conda environment, run the following commands:
+1. conda install dask=2025.1.0 -c conda-forge
+2. conda install -c conda-forge modin-all
+3. conda install -c conda-forge pyspark
+4. conda install conda-forge::matplotlib
+5. conda install conda-forge::py4j
+6. conda install anaconda::networkx
+7. conda install conda-forge::tqdm
+8. conda install conda-forge::memory_profiler
+9. conda install anaconda::seaborn
+10.conda install -c conda-forge ibis-duckdb
+11.conda install -c conda-forge ibis-polars
+
+
+
+
+
+
+
+
+
+

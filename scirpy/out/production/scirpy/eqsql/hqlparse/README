@@ -1,0 +1,4 @@
+Module to parse HQL queries.
+This implementation is for very simple queries.
+//TODO: Use a full blown SQL like parser (we
+already have this as part of Tejas' work)

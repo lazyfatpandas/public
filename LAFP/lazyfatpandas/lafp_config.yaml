@@ -1,0 +1,4 @@
+scirpy_name: scirpy.jar
+#scirpy_location: /home/bhushan/intellijprojects/scirpy/out/artifacts/scirpy_jar/
+scirpy_location: /home/bhushan/intellijprojects/edbt/scirpy/out/artifacts/scirpy_jar/
+scirpy_rel_location: ../../scirpy/out/artifacts/scirpy_jar/

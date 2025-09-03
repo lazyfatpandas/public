@@ -1,0 +1,27 @@
+package ast;
+public enum ExprAST  {
+    BoolOp,
+    BinOp,
+    UnaryOp,
+    Lambda,
+    IfExp,
+    Dict,
+    Set,
+    ListComp,
+    SetComp,
+    DictComp,
+    GeneratorExp,
+    Yield,
+    Compare,
+    Call,
+    Repr,
+    Num,
+    Str,
+    Attribute,
+    Subscript,
+    Name,
+    List,
+    Tuple,
+    JoinedStr,
+    Arg
+}

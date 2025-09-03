@@ -1,0 +1,12 @@
+{
+    "dtype": {
+        "col2": "float32",
+        "col3": "float32",
+        "col1": "float32"
+    },
+    "usecols": [
+        "col3",
+        "col2",
+        "col1"
+    ]
+}

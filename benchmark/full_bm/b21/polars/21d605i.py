@@ -1,0 +1,103 @@
+import ibis
+from time import time
+from os import environ
+import csv
+from tqdm import tqdm
+from time import sleep
+import psutil
+import threading
+from threading import *
+import polars as pl
+
+
+
+def get_sys_stats():
+    global max_ram_usage
+    max_ram_usage=0.0
+    max_ram = 0.0
+    max_cpu = 0.0
+    while 1 < 2:
+        ram_usage = (psutil.virtual_memory()[3] / 1000000)
+        if (max_ram_usage < ram_usage):
+            max_ram_usage = ram_usage
+        sleep(0.2)
+
+
+def myfunc():
+    con = ibis.polars.connect()
+    start = time()
+    df = con.read_csv('/media/bhushan/nvme1/data/vldb/b21/s5_city.csv',dtypes={"NUMBER": pl.Utf8})
+    # head
+    print(df.limit(5).execute())
+
+    df = df.drop(['UNIT', 'DISTRICT', 'REGION', 'CITY', 'HASH', 'ID'])
+    df = df.mutate(POSTCODE=df.POSTCODE.cast("string"))
+    df = df.mutate(
+        ADDRESS=df.NUMBER.cast("string").concat(df.STREET)  # concat with no sep
+    )
+    df = df.drop(['STREET','NUMBER'])
+    df = df.rename({
+        "long":"LON",
+        "lat":"LAT",
+        "address":"ADDRESS",
+        "zipcode":"POSTCODE"
+    })
+    # df = df.mutate(
+    #     address=df.address.re_replace(r"\s{2,}", " ")
+    # )
+    df = df.mutate(address=df.address.re_replace("  ", " "))
+    df = df.mutate(address=df.address.re_replace("   ", " "))
+    df = df.mutate(address=df.address.re_replace("    ", " "))
+
+
+    #lsit of zips for each borough
+    manzips = [10026, 10027, 10030, 10037, 10039,10001, 10011, 10018, 10019, 10020, 10036,10029,
+               10035,10010, 10016, 10017, 10022,10012, 10013, 10014,
+               10004, 10005, 10006, 10007, 10038, 10280,
+               10002, 10003, 10009,
+               10021, 10028, 10044, 10065, 10075, 10128,
+               10023, 10024, 10025,
+               10031, 10032, 10033, 10034, 10040]
+    bkzips = [11212, 11213, 11216, 11233, 11238,11209, 11214, 11228, 11204, 11218, 11219, 11230,
+              11234, 11236, 11239, 11223, 11224, 11229, 11235,
+              11201, 11205, 11215, 11217, 11231,
+              11203, 11210, 11225, 11226,
+              11207, 11208,
+              11211, 11222,
+              11220, 11232,
+              11206, 11221, 11237]
+    #convert to strings, create list
+    man_zips = [str(i) for i in manzips]
+    bk_zips = [str(i) for i in bkzips]
+    manbk_zips = man_zips+bk_zips
+
+    df = df.filter(df.zipcode.isin(manbk_zips))
+    print(df.limit(5).execute())
+
+    df2 = con.read_csv('/media/bhushan/nvme1/data/vldb/b21/s5_pluto.csv')
+    print(df2.limit(1).execute())
+    # final_df = df.union(df2)
+    # print(final_df.schema())
+
+    print(time()-start)
+
+if __name__=='__main__':
+    max_ram_usage=0.0
+    time1 = time()
+    init_ram = (psutil.virtual_memory()[3] / 1000000)
+    # print('init ram is',init_ram)
+    t1 = threading.Thread(target=get_sys_stats, daemon=True)
+    t1.start()
+    t2 = threading.Thread(target=myfunc)
+    t2.start()
+    t2.join()
+    ram_usage = (max_ram_usage - init_ram)
+    print('Maximum memory used: {} MiB'.format(ram_usage))
+    time2 = (time() - time1)
+    file = open('../../Results.csv','a',newline='')
+    writer = csv.writer(file)
+    writer.writerow(["b21", "12.6GB", "s5.csv","polars",time2,format(ram_usage),"215B"])
+    file.close()
+
+
+

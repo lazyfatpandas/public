@@ -1,0 +1,2 @@
+After making any changes to LAFP, run the following command from within the LAFP folder to install it locally:
+pip install -e .

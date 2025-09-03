@@ -1,0 +1,5 @@
+ sourcePath = /home/bhushan/intellijprojects/scirpy/pythonIR/json
+ path = /home/bhushan/intellijprojects/scirpy/pythonIR/json
+ destinationPath= /home/bhushan/intellijprojects/scirpy/pythonIR/optimizedCode
+ dataPath = /home/bhushan/intellijprojects/scirpy/pythonIR/data
+ referenceFilesPath = /home/bhushan/intellijprojects/scirpy/pythonIR/reference-code-validation

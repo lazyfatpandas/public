@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Main-Class: PythonGateWay.ScaPaGateway
+Class-Path: commons-csv-1.10.0.jar commons-io-2.11.0.jar commons-lang3-3
+ .1.jar diffutils-1.2.1.jar json-20140107.jar json_simple-1.1.jar junit-
+ 4.0.jar log4j-1.2.17.jar py4j0.10.9.3.jar sapjco3.jar soot-trunk-1.0.ja
+ r sosnoski-1.0.jar
+

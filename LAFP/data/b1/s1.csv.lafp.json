@@ -1,0 +1,12 @@
+{
+    "dtype": {
+        "fare_amount": "float32",
+        "passenger_count": "float32"
+    },
+    "parse_dates": ["tpep_pickup_datetime"],
+    "usecols": [
+        "passenger_count",
+        "tpep_pickup_datetime",
+        "fare_amount"
+    ]
+}

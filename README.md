@@ -1,2 +1,2 @@
 # public
-Lazy Fat Pandas repository
+Lazy Fat Pandas repository.
